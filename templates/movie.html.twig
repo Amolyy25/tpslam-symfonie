@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="form-card">
+        <p>Nombre de films enregistrés : {{ total }}</p>
+        <form method="get" action="{{ path('app_movie_index') }}">
+            <input type="text" name="q" value="{{ q }}" placeholder="Rechercher un titre...">
+            <button type="submit">Chercher</button>
+        </form>
+    {% if movies %}
+        <h1>Liste des films présent dans la db</h1>
+            <ul>
+                {% for movie in movies %}
+                <li>Nom : <a href="{{ path('app_movie_show', {id: movie.id}) }}">{{movie.title}}</a> <a href="{{ path('app_movie_edit', {id: movie.id}) }}">Modifier</a></li>
+                {% endfor %}
+            </ul>
+    {% elseif q %}
+        <h1>Aucun film trouvé pour « {{ q }} »</h1>
+    {% else %}
+        <h1>Aucun film pour le moment...</h1>
+    {% endif %}
+    </div>
+{% endblock %}

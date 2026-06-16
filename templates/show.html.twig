@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="form-card">
+    {% if movie %}
+        <h1>{{ movie.title }} est un super film</h1>
+        <p>Le film à été crée par {{ movie.director }} en {{movie.releaseyear}}</p>
+        <p>Genre : {{ movie.genre }}</p>
+        <br>
+        <p>Synopsis : {{ movie.synopsis }}</p>
+        <form method="post" action="{{ path('app_movie_delete', {id: movie.id}) }}">
+            <button type="submit">Supprimer</button>
+        </form>
+    {% else %}
+        <h1>Film introuvable !</h1>
+    {% endif %}
+    </div>
+{% endblock %}
